@@ -1,0 +1,35 @@
+@charset "EUC-KR";
+
+#wrap{
+	padding: 20px 100px 100px;
+}
+
+#hgroup1{
+	display: flex;
+}
+
+#memberTab{
+	float: right;
+}
+
+a {
+	text-decoration-line : none;
+}
+
+#logo{
+	text-align: left;
+	margin-left: 15px; 
+}
+
+#logo_img{
+	width: 100px;
+	height: 30px;
+}
+
+#blank{
+	height: 300px;
+}
+
+#footer1{
+	
+}

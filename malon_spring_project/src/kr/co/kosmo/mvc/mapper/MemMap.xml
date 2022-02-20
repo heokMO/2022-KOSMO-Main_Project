@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<insert id="joinIn" parameterType="memvo">
+		insert into mem values (#{mem_acc_id}, #{mem_pwd}, #{mem_nick}, #{mem_email})
+	</insert>
+	
+	<select id="idchk" resultType="_int">
+		select count(*) from mem where mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="login" parameterType="memvo" resultType="_int">
+		select count(*) from mem where mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR} and mem_pwd = #{mem_pwd, jdbcType=VARCHAR}
+	</select>
+	
+</mapper>
