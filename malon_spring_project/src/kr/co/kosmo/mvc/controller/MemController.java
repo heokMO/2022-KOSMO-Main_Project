@@ -18,8 +18,7 @@ import kr.co.kosmo.mvc.service.MemService;
 public class MemController {
 	@Autowired
 	private MemService  memService;
-	
-	
+		
 	@RequestMapping(value="joinForm")
 	public String showJoin(Model m) {
 		return "memJoinForm";
@@ -64,6 +63,7 @@ public class MemController {
 		session.invalidate();
 		return "redirect:/";
 	}
+
 	
 
 	

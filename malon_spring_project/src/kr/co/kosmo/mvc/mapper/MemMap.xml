@@ -16,4 +16,15 @@
 		select count(*) from mem where mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR} and mem_pwd = #{mem_pwd, jdbcType=VARCHAR}
 	</select>
 	
+	<select id="myInfo" resultType="memvo">
+		select  mem_acc_id, mem_pwd, mem_nick, mem_email
+		from mem 
+		where mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR}
+	</select>
+	
+	<update id="memberDelete" parameterType="memvo">
+		DELETE FROM MEM 
+		WHERE mem_acc_id=#{mem_acc_id}
+	</update>
+	
 </mapper>

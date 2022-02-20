@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="EUC-KR">
-	<link rel="stylesheet" href="/resources/css/new_main.css">
+	<link rel="stylesheet" href="/resources/css/join_form.css">
 </head>
 <body>
 	<div id="logo">

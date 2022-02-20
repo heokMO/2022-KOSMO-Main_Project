@@ -16,7 +16,7 @@
 				</c:when>
 				<c:when test="${sessionScope.sessionId != null}">
 					<a href="/member/logout" id="logout">로그아웃</a>
-					<a href="">마이페이지</a>
+					<a href="/member/mypage">마이페이지</a>
 				</c:when>
 			</c:choose>
 			<a href="/test" id="test">test</a>

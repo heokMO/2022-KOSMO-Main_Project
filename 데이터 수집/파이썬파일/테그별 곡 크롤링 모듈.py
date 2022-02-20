@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[9]:
-
-
 import selenium 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -18,15 +15,9 @@ from urllib.parse import urlparse
 from urllib import parse
 
 
-# In[10]:
-
-
 path ="C:/Chrome/chromedriver_win32/chromedriver"
 serv = Service(path)
 myBrowser = webdriver.Chrome(service = serv)
-
-
-# In[21]:
 
 
 def input_keyword(myBrowser,keyword):
@@ -34,9 +25,6 @@ def input_keyword(myBrowser,keyword):
     time.sleep(2)
     url = myBrowser.current_url
     return theme_list(myBrowser, url, keyword)
-
-
-# In[30]:
 
 
 def theme_list(myBrowser, url, input_text):    
@@ -51,9 +39,6 @@ def theme_list(myBrowser, url, input_text):
     return make_csv(song_list, input_text)
 
 
-# In[13]:
-
-
 def get_theme_sum(myBrowser):
     soup = BeautifulSoup(myBrowser.page_source, 'html.parser')
     theme_sum = soup.find('div', class_='search_result')
@@ -61,9 +46,6 @@ def get_theme_sum(myBrowser):
     theme_sum = int(theme_sum)
     theme_sum = math.ceil(theme_sum / 20)
     return theme_sum
-
-
-# In[34]:
 
 
 def theme_detail(myBrowser):
@@ -83,9 +65,6 @@ def theme_detail(myBrowser):
         song_list = song_list + get_song_list(myBrowser)
         myBrowser.back()
     return song_list
-
-
-# In[32]:
 
 
 def get_song_list(myBrowser):
@@ -117,8 +96,6 @@ def get_song_list(myBrowser):
     return songs_info
 
 
-# In[16]:
-
 
 def make_csv(songs_list, input_text):
     col = ['곡','앨범','아티스트', '테마']
@@ -126,10 +103,6 @@ def make_csv(songs_list, input_text):
     df = pd.DataFrame(songs_list,columns=col)
     df.to_csv('{}.csv'.format(input_text))
     return  df  
-
-
-# In[35]:
-
 
 input_keyword(myBrowser,'노트북')
 

@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import selenium 
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
@@ -13,6 +7,7 @@ from bs4 import BeautifulSoup
 import time
 import csv
 import pandas as pd
+
 path ="C:/kosmo100/python/util/chromedriver_win32/chromedriver"
 serv = Service(path)
 myBrowser = webdriver.Chrome(service = serv)
@@ -43,24 +38,12 @@ for i in range(1,2000):
     
 for i in range(len(song_titles)):
     songs_info.append((song_titles[i], song_albums[i], song_artists[i], songs_imgsrc[i],'락_메탈'))
-print("완료")
 
 
-make_csv(songs_info)
 
 
-# In[ ]:
 
 
-def make_csv(songs_info):
-
-col = ['곡','앨범','아티스트','장르', '주소']
-  
-df = pd.DataFrame(songs_info,columns=col)
-df.to_csv('락_메탈.csv')
-
-
-# In[ ]:
 
 
 
