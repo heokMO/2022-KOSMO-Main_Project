@@ -1,5 +1,7 @@
 package kr.co.kosmo.mvc.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,20 +19,22 @@ public class MypageController {
 	private MyPageService myPageService;
 	
 	@GetMapping(value="mypage")
-	public String myInfo(Model m, MemVO vo) {
-		String id = "iamnina";
-		MemVO vo1 = myPageService.myInfo(id);
-		m.addAttribute("myinfo", vo1);
+	public String myInfo(Model m, HttpSession session) {
+		String id = (String) session.getAttribute("sessionId");
+		MemVO memVO = myPageService.myInfo(id);
+		m.addAttribute("myinfo", memVO);
 		return "member/mypage";
 	}
 	
 	//회원탈퇴
 	@RequestMapping(value = "delete", method= {RequestMethod.POST})
-	public String delete(Model m, MemVO vo){
+	public String delete(Model m, MemVO vo, HttpSession session){
     	int memCount = myPageService.memberDelete(vo);
     	String msg;
-    	if (memCount == 1)
-    		msg = "이용해주셔서 감사합니다.";
+    	if (memCount == 1) {
+    		session.invalidate();
+    		msg = "이용해주셔서 감사합니다.";    		
+    	}
     	else
     		msg = "정보를 찾을 수 없는 회원입니다.";
 

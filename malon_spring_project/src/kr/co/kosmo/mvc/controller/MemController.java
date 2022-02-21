@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.kosmo.mvc.dto.MemVO;
 import kr.co.kosmo.mvc.service.MemService;
+import kr.co.kosmo.mvc.service.MyPageService;
 
 @Controller
 @RequestMapping(value="member/*")
 public class MemController {
 	@Autowired
 	private MemService  memService;
+	@Autowired
+	private MyPageService myPageService;
 		
 	@RequestMapping(value="joinForm")
 	public String showJoin(Model m) {
@@ -44,12 +47,13 @@ public class MemController {
 	}
 	
 	@RequestMapping(value="login")
-	public String login(Model m, MemVO vo, HttpSession session) {
-		int cnt = memService.login(vo);
+	public String login(Model m, MemVO formVO, HttpSession session) {
+		MemVO memVO = myPageService.myInfo(formVO.getMem_acc_id());
+		int cnt = memService.login(formVO);
 		String msg;
 		if (cnt == 1) {
-			session.setAttribute("sessionId", vo.getMem_acc_id());
-			session.setAttribute("sessionNick", vo.getMem_nick());
+			session.setAttribute("sessionId", memVO.getMem_acc_id());
+			session.setAttribute("sessionNick", memVO.getMem_nick());
 			return "main/main";
 		} else {
 			msg = "아이디 또는 비밀번호가 다릅니다.";
