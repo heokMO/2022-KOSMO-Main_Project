@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<link rel="stylesheet" href="/resources/css/mypage.css">
+<link rel="stylesheet" href="/resources/css/confirm.css">
 </head>
 <body>
 	<div id="privacy_form">
