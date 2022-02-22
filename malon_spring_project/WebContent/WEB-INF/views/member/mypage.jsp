@@ -60,13 +60,13 @@
 		$(document).ready(function() {
 			$("#deleteBtn").on("click", function(e) {
 				e.preventDefault();
-				$("#myinfo_form").attr("action", "/delete")
+				$("#myinfo_form").attr("action", "/member/delete")
 				$("#myinfo_form").submit();
 			});
 			
 			$("#updateBtn").on("click", function(e) {
 				e.preventDefault();
-				$("#myinfo_form").attr("action", "/updateDetail")
+				$("#myinfo_form").attr("action", "/member/updateDetail")
 				$("#myinfo_form").submit();
 				
 			});

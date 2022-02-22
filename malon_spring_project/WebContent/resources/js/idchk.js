@@ -27,7 +27,7 @@ email.addEventListener("focusout", isEmailCorrect);
 
 /*콜백 함수*/
 function checkId() {
-    var idPattern = /[a-zA-Z0-9_-]{5,20}/;
+    var idPattern =/^[a-z]+[A-Z]+[0-9]{5,20}$/g;
     if(id.value === "") {
         error[0].innerHTML = "필수 정보입니다.";
         error[0].style.display = "block";

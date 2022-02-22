@@ -50,7 +50,12 @@ public class MypageController {
 	
     @RequestMapping(value="update")
 	public String updateDetail(Model m, MemVO vo,String newPwd) {
-    	//TODO: Mypage 업데이트
 		return "member/mypage";
+	}
+    
+    @RequestMapping(value="realupdateDetail")
+	public String memberUpdate(MemVO vo) {
+    	myPageService.memberUpdate(vo);
+		return "redirect:updateDetail";
 	}
 }

@@ -27,4 +27,14 @@
 		WHERE mem_acc_id=#{mem_acc_id}
 	</update>
 	
+	<!-- 회원정보수정 	-->
+	<update id="updateMember" parameterType="memvo">
+		UPDATE mem SET 
+		mem_pwd = #{mem_pwd},
+		mem_nick = #{mem_nick}, 
+		mem_email = #{mem_email} 		 
+		WHERE mem_acc_id=#{mem_acc_id}
+	</update>
+	
+	
 </mapper>

@@ -48,9 +48,7 @@ function comparePw() {
         error[1].style.display = "none";
         confirmPwd = true;
     }
-
 }
-
 
 function checkNickName() {
     var namePattern = /[a-zA-Z가-힣]/;
