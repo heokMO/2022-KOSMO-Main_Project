@@ -136,7 +136,7 @@ select {
     margin: 30px 0 91px;
 }
 
-#updateBtn{
+.update_btn{
     width: 25%;
     padding: 10px 0 10px;
     border: 0;
@@ -149,18 +149,6 @@ select {
     margin-right:10px; 
 }
 
-#deleteBtn{
-    width: 25%;
-    padding: 10px 0 10px;
-    border: 0;
-    cursor: pointer;
-    color: #4F594F;
-    background-color: #BED7D8;
-    font-size: 15px;
-    font-weight: 10;
-    font-family: 'Arita-dotum-Medium';
-    margin-right:-10px; 
-}
 
 #btnLogin:hover{
 	background-color: #53928C;

@@ -15,8 +15,8 @@
 					<a href="/member/joinForm">회원가입</a>
 				</c:when>
 				<c:when test="${sessionScope.sessionId != null}">
-					<a href="/member/logout" id="logout">로그아웃</a>
-					<a href="/member/mypage">마이페이지</a>
+					<a id="logout">로그아웃</a>
+					<a href="/member/updateDetail">마이페이지</a>
 				</c:when>
 			</c:choose>
 			<a href="/test" id="test">test</a>
@@ -26,9 +26,17 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+	function logoutConfirm() {
+		 if (confirm("로그아웃 하시겠습니까?") == true){    //확인
+			 window.location.href = '/member/logout';
+		 }else{  
+		     return false;
+		 }
+	}
+
 	$('#logout').click(function(e){
 		e.stopPropagation();
-		alert("로그아웃 하시겠습니까?");
+		logoutConfirm();
 	});
 
 </script>
