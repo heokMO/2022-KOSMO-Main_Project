@@ -24,34 +24,7 @@
 						</span>
 					</div>
 				</div>
-				<div>
-					<h3 class="mypage_title"><label for="mem_pwd"> 현재 비밀번호 </label></h3>
-					<div>
-						<span class="box int_pass"> 
-							<input type="password" name="mem_pwd" class="int" id="mem_pwd">
-						</span>
-					</div>
-				</div>
-				<div>
-					<h3 class="mypage_title"><label for="mem_pwd_new"> 새 비밀번호 </label></h3>
-					<div>
-						<span class="box int_pass"> 
-							<input type="password" name="mem_pwd_new" class="int" id="mem_pwd_new">
-						</span>
-						<span class="error_next_box" id="checkMsg"></span>
-					</div>
-				</div>	
-				<div>
-					<h3 class="mypage_title">
-						<label for="mem_pwd_new_re"> 새 비밀번호 확인 </label>
-					</h3>
-					<div>
-						<span class="box int_pass"> 
-							<input type="password" name="mem_pwd_new_re" class="int" id="mem_pwd_new_re">
-						</span>
-						<span class="error_next_box" id="checkMsg"></span>
-					</div>
-				</div>
+
 				<div>
 					<h3 class="mypage_title"><label for="mem_nick"> 닉네임 </label></h3>
 					<div>
@@ -72,9 +45,10 @@
 				<p>
 				<div class="btn_area">
 				<span>
-					<input type="button" id="updateBtn" name="updateBtn" value="수정">
+					<input type="button" id="updateBtn" name="updateBtn" class="update_btn" value="수정">
+					<input type="button" id="pwdupdateBtn" name="pwdupdateBtn" class="update_btn" onClick="document.location.href='pwdUpdatefrm'" value="비밀번호 변경">
 				</span>
-					<input type="submit" id="deleteBtn" value="탈퇴">
+					<input type="submit" id="deleteBtn" class="update_btn" value="탈퇴">
 				</div>
 				</div>
 			</div>
@@ -83,25 +57,24 @@
 	</div>
 </body>
 
-<script type="text/javascript" src="/resources/js/pwdchk.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/resources/js/myinfoUpdate.js" charset="UTF-8"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#deleteBtn").on("click", function(e) {
 			e.preventDefault();
-			$("#myinfo_form").attr("action", "/delete")
-			$("#myinfo_form").submit();
+			removeCheck();
 		});
-		
+			
 	    $('#updateBtn').click(function(e){
 	    	e.stopPropagation();
-	    	checkPw();
-	    	comparePw();
 	    	checkNickName();
 	    	isEmailCorrect();
 	    	var updatePermission = joinOk();
 	    	if (updatePermission){
-				alert("수정조건 만족 ");
+				alert("개인정보가 수정되었습니다.");
+				$("#myinfo_form").attr("action", "/member/nickUpdate");
+				$("#myinfo_form").submit();
 	    	}
 	    })	
 	});
