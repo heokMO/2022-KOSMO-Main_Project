@@ -23,4 +23,9 @@ public class MyPageService implements MyPageDAO{
 		int memCount = ss.delete("member.memberDelete",vo);
 		return memCount;
 	}
+
+	@Override
+	public void memberUpdate(MemVO vo) {
+		 ss.update("member.memberUpdate", vo);
+	}
 }

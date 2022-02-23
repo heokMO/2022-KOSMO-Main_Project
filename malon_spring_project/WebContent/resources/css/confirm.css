@@ -66,12 +66,12 @@ fieldset {
 }
 #mem_nick{
 	border: none;
-	background-color: #f5f6f7;
+	background-color: #fff;
 }
 
 #mem_email{
 	border: none;
-	background-color: #f5f6f7;
+	background-color: #fff;
 }
 
 
@@ -146,9 +146,21 @@ select {
     font-size: 15px;
     font-weight: 10;
     font-family: 'Arita-dotum-Medium';
-    margin-right:10px; 
+    margin-right: 10px; 
 }
 
+#deleteBtn{
+    width: 25%;
+    padding: 10px 0 10px;
+    border: 0;
+    cursor: pointer;
+    color: #4F594F;
+    background-color: #BED7D8;
+    font-size: 15px;
+    font-weight: 10;
+    font-family: 'Arita-dotum-Medium';
+    margin-right:-10px; 
+}
 
 #btnLogin:hover{
 	background-color: #53928C;
@@ -158,6 +170,8 @@ select {
 #header1{
 	text-align: center;
 }
+
+
 
 @font-face {
     font-family: 'Arita-dotum-Medium';

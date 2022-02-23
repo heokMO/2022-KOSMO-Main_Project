@@ -22,6 +22,20 @@
 		where mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR}
 	</select>
 	
+	<!-- 회원정보수정    -->
+   <update id="memberUpdate" parameterType="memvo">
+      UPDATE mem SET
+      <if test="mem_nick != null"> 
+	      mem_nick = #{mem_nick}, 
+	      mem_email = #{mem_email}   
+      </if> 
+      <if test="mem_pwd != null"> 
+	      mem_pwd = #{mem_pwd}
+      </if> 
+      WHERE mem_acc_id = #{mem_acc_id}
+      
+   </update>
+	
 	<update id="memberDelete" parameterType="memvo">
 		DELETE FROM MEM 
 		WHERE mem_acc_id=#{mem_acc_id}
