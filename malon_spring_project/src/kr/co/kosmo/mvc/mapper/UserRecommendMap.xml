@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user_recommend">
+	<resultMap type="user_recommend_vo" id="user_recommend_info">
+		<result column="ID" property="id"/> 
+		<result column="TITLE" property="title" /> 
+		<result column="CONTENT" property="content" /> 
+		<result column="USER_ID" property="userID"/> 
+		<result column="WRITTEN_TIME" property="writtenTime"/> 
+		<result column="THUMBS_UP" property="thumbsUp"/>
+	</resultMap>
+	
+	<select id="get_list" resultMap="user_recommend_info">
+		select title, user_id, WRITTEN_TIME, THUMBS_UP 
+		from RECOMMENDED_INFO
+	</select>
+	
+</mapper>
+
+

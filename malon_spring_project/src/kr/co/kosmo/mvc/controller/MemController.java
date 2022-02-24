@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.kosmo.mvc.dto.MemVO;
 import kr.co.kosmo.mvc.service.MemService;
 import kr.co.kosmo.mvc.service.MyPageService;
+import kr.co.kosmo.mvc.service.SongService;
 
 @Controller
 @RequestMapping(value="member/*")
@@ -21,6 +22,9 @@ public class MemController {
 	private MemService  memService;
 	@Autowired
 	private MyPageService myPageService;
+	@Autowired
+	private SongService songservice; //TODO : 수정요망
+
 		
 	@RequestMapping(value="joinForm")
 	public String showJoin(Model m) {
@@ -54,7 +58,7 @@ public class MemController {
 		if (cnt == 1) {
 			session.setAttribute("sessionId", memVO.getMem_acc_id());
 			session.setAttribute("sessionNick", memVO.getMem_nick());
-			return "main/main";
+			return "redirect:/";
 		} else {
 			msg = "아이디 또는 비밀번호가 다릅니다.";
 			m.addAttribute("msg",msg);

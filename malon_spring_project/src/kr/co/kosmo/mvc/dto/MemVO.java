@@ -5,6 +5,8 @@ public class MemVO {
 	private String mem_pwd;
 	private String mem_nick;
 	private String mem_email;
+	
+	
 	public String getMem_acc_id() {
 		return mem_acc_id;
 	}

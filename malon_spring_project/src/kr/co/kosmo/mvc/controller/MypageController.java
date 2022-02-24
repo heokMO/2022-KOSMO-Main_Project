@@ -6,15 +6,12 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.kosmo.mvc.dto.MemVO;
 import kr.co.kosmo.mvc.service.MemService;
@@ -79,7 +76,6 @@ public class MypageController {
 		
 		int cnt = memService.login(memVO);
 		
-		String msg;
 		if (cnt == 1) {
 			memVO.setMem_pwd(newPwd);
 			myPageService.memberUpdate(memVO);
