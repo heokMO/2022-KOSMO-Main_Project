@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import kr.co.kosmo.mvc.dao.SongDAO;
 import kr.co.kosmo.mvc.dto.SongVO;
 
@@ -20,6 +19,11 @@ public class SongService implements SongDAO{
 	@Override
 	public List<SongVO> getSongList() {
 		return ss.selectList("song.getSonglist");
+	}
+	
+	@Override
+	public SongVO getSongDetail(int song_id) {
+		return ss.selectOne("song.getSongDetail", song_id);
 	}
 	
 

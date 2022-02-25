@@ -23,6 +23,16 @@
 		where id=#{userRcmId }
 	</select>
 	
+	
+	<select id="search_songs" resultType="songvo">
+		select SONG_ID, SONG_TITLE, SONG_ALBUM, SONG_ARTIST 
+		from SONG
+		where (SONG_TITLE like '%' || #{searchWord} || '%'
+			or SONG_ALBUM like '%' || #{searchWord} || '%'
+			or SONG_ARTIST like '%' || #{searchWord} || '%')
+  <![CDATA[ and ROWNUM <= 10]]>
+        order by SONG_ID
+	</select>
 </mapper>
 
 

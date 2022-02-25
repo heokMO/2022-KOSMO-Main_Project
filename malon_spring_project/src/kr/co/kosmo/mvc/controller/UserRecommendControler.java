@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import kr.co.kosmo.mvc.dto.SongVO;
+import kr.co.kosmo.mvc.service.SongService;
 import kr.co.kosmo.mvc.service.UserRecommendService;
 
 
@@ -21,18 +25,21 @@ import kr.co.kosmo.mvc.service.UserRecommendService;
 @RequestMapping(value="userrecommend/*")
 public class UserRecommendControler {
 	@Autowired
-	private UserRecommendService service;
+	private UserRecommendService urservice;
+	
+	@Autowired
+	private SongService songService;
 	
     @RequestMapping(value="list")
     public String listUp(Model m) {
-    	m.addAttribute("list", service.getRecommend());
+    	m.addAttribute("list", urservice.getRecommend());
     	return "userrecommend/list";
     }
     
     @GetMapping(value="detail")
     public String detail(Model m, @RequestParam(name="userRcmId") int userRcmId) {
     	
-    	m.addAttribute("info", service.getInfo(userRcmId));
+    	m.addAttribute("info", urservice.getInfo(userRcmId));
     	return "userrecommend/detail";
     }
     
@@ -43,13 +50,34 @@ public class UserRecommendControler {
     }
     
     @ResponseBody
-	@RequestMapping(value="/wordSearchShow.action", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@RequestMapping(value="wordSearchShow.action", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public String wordSearchShow(HttpServletRequest request) {			
 		String searchWord = request.getParameter("searchWord");
-
+		List<SongVO> songList = urservice.wordSearchShow(searchWord);
 		
-		List<SongVO> songList = UserRecommendService.wordSearchShow(searchWord);
+		String result = "";
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			result = mapper.writeValueAsString(songList);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+    
+    @ResponseBody
+	@RequestMapping(value="songadd", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public String songAdd(HttpServletRequest request) {			
+		String songId = request.getParameter("song_id");
+		SongVO song = songService.getSongDetail(Integer.parseInt(songId));
 		
-		return null;
+		String result = "";
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			result = mapper.writeValueAsString(song);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();//TODO: 변경 필요
+		}
+		return result;
 	}
 }

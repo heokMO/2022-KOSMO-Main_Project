@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="like_it">
+	<select id="getSongLikeCnt" resultType="_int">
+		select count(*) from like_it_list where song_id = #{song_id}
+	</select>
+
+	<select id="getLikeIt" resultType="_int">
+		select count(*) from like_it_list where song_id = #{song_id} and mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR}
+	</select>
+	
+</mapper>
+
+
+

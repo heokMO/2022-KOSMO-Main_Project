@@ -10,6 +10,10 @@
 	  	]]>
 	</select>
 	
+	<select id="getSongDetail" resultType="songvo">
+			SELECT * FROM song WHERE song_id = #{song_id }
+	</select>
+	
 </mapper>
 
 

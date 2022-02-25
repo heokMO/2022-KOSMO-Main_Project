@@ -24,7 +24,9 @@
 							<ul>
 								<div>
 									<c:forEach var="e" items="${songlist }"> 			
-										<li>${e.song_album }</li>		
+										<a href="/song/showsongdetail?songId=${e.song_id}">
+											<li>${e.song_album}</li>
+										</a>
 									</c:forEach>
 								</div>
 							</ul>

@@ -25,8 +25,14 @@ public class UserRecommendService implements UserRecommendDAO{
 		return ss.selectOne("user_recommend.get_info", userRcmId);
 	}
 
-	public static List<SongVO> wordSearchShow(String searchWord) {
-		// TODO Auto-generated method stub
+	@Override
+	public List<SongVO> wordSearchShow(String searchWord) {
+		return ss.selectList("user_recommend.search_songs",searchWord);
+	}
+
+	@Override
+	public SongVO getSong(String songId) {
+		
 		return null;
 	}
 	
