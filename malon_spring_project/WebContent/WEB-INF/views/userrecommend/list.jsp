@@ -4,9 +4,11 @@
     
 <div>
 	<c:forEach var="e" items="${list }"> 			
-		<li>${e.title }</li>
-		<li>${e.userID }</li>
-		<li>${e.writtenTime }</li>
-		<li>${e.thumbsUp }</li>
+		<li><a href="detail?userRcmId=${e.id }">title: ${e.title }</a></li>
+		<li>userID: ${e.userID }</li>
+		<li>writtenTime: ${e.writtenTime }</li>
+		<li>thumbsUp: ${e.thumbsUp }</li>
+		<p>----------------------------------------------------------------------------</p>
 	</c:forEach>
+	<button type="button" onclick="window.open('create');">create</button>
 </div>

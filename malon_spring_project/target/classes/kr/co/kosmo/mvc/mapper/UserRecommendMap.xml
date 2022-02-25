@@ -13,8 +13,14 @@
 	</resultMap>
 	
 	<select id="get_list" resultMap="user_recommend_info">
-		select title, user_id, WRITTEN_TIME, THUMBS_UP 
+		select id, title, user_id, WRITTEN_TIME, THUMBS_UP 
 		from RECOMMENDED_INFO
+	</select>
+	
+	<select id="get_info" resultMap="user_recommend_info">
+		select title, user_id, WRITTEN_TIME, THUMBS_UP, CONTENT 
+		from RECOMMENDED_INFO
+		where id=#{userRcmId }
 	</select>
 	
 </mapper>

@@ -14,7 +14,7 @@ public class MyPageService implements MyPageDAO{
 	
 	@Override
 	public MemVO myInfo(String memId) {
-		MemVO vo = ss.selectOne("member.myInfo",memId);
+		MemVO vo = ss.selectOne("member.myInfo", memId);
 		return vo;
 	}
 	
