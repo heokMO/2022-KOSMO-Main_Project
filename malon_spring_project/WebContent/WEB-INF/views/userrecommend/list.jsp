@@ -10,5 +10,8 @@
 		<li>thumbsUp: ${e.thumbsUp }</li>
 		<p>----------------------------------------------------------------------------</p>
 	</c:forEach>
-	<button type="button" onclick="window.open('create');">create</button>
+
+	<c:if test="${sessionScope.sessionId != null}">
+		<button type="button" onclick="window.open('create');">create</button>
+	</c:if>	
 </div>

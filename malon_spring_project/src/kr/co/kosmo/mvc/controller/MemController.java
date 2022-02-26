@@ -22,8 +22,7 @@ public class MemController {
 	private MemService  memService;
 	@Autowired
 	private MyPageService myPageService;
-	@Autowired
-	private SongService songservice; //TODO : ¼öÁ¤¿ä¸Á
+
 
 		
 	@RequestMapping(value="joinForm")

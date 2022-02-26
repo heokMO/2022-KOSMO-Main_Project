@@ -3,6 +3,7 @@ package kr.co.kosmo.mvc.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,8 +45,11 @@ public class UserRecommendControler {
     }
     
     @RequestMapping(value="create")
-    public String create(Model m) {
-    	
+    public String create(Model m, HttpSession session) {
+    	if(session.getAttribute("sessionId") == null) {
+    		return "main/main"; //TODO:이 역할을 할 것이 필요
+    	}
+    		
     	return "userrecommend/create";
     }
     
@@ -76,7 +80,7 @@ public class UserRecommendControler {
 			ObjectMapper mapper = new ObjectMapper();
 			result = mapper.writeValueAsString(song);
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();//TODO: 변경 필요
+			e.printStackTrace();
 		}
 		return result;
 	}

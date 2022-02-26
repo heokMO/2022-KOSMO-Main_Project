@@ -31,12 +31,6 @@ public class SongController {
 	return "redirect:/";
 	}
 	
-    @RequestMapping(value="showsongdetail")
-	public String showSongDetail() {
-		return "song/showSongDetail";
-	}
-    
-	
     @GetMapping(value="showsongdetail")
 	public String showSongDetail(Model m, @RequestParam("songId") int song_id, HttpSession session) {
     	//로그인 한 유저의 해당 곡 좋아요 여부
@@ -54,7 +48,7 @@ public class SongController {
     	m.addAttribute("likeit", likeIt);
     	m.addAttribute("songDetail",songVO);
     	m.addAttribute("likeCnt", likeCnt);
-		return "song/showSongDetail";
+		return "showSongDetail";
 	}
     
     @RequestMapping(value="songLikeUpdate", produces="application/text;charset=utf8", method=RequestMethod.GET)

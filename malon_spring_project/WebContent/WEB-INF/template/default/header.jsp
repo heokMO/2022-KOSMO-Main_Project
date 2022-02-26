@@ -20,7 +20,6 @@
 				</c:when>
 			</c:choose>
 			<a href="/test" id="test">test</a>
-			<a href="showsongdetail">곡디테일데모</a>
 			<a href="/userrecommend/list" id="test">User 추천 리스트</a>
 		</div>
 	</div>

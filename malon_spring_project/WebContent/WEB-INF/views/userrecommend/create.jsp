@@ -10,7 +10,15 @@
     border: 1px solid #444444;
   }
 </style>    
-    
+<div>
+	<label for="title"> Title </label>
+	<input name="title" id="title">
+</div>
+<div>
+	<label for="content"> Content </label>
+	<input name="content" id="content">
+</div> 
+
     
 <div>
   <table id="songlist">
@@ -64,6 +72,7 @@
 												+"<td>" + json.song_title + "</td>"
 												+"<td>" + json.song_artist + "</td>"
 												+"<td>" + json.song_album + "</td>"
+												+"<input type='hidden' name='songs' value=" + json.song_id +">"
 											+"<tr>";
 									$("#songlist").append(t_html);
 								}
