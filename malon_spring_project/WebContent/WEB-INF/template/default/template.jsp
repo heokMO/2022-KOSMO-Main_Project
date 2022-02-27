@@ -12,14 +12,11 @@
 </head>
 <body>
 	<div id="wrap">
-		<div id="hgroup">
-			<tiles:insertAttribute name="header"/>
-		</div>
 		<div id="navigation">
 			<tiles:insertAttribute name="menu"/>
 		</div>
 		<tiles:insertAttribute name="body"/>
-		<div id="blank"></div>
+		
 		<tiles:insertAttribute name="footer"/>
 	</div>
 </body>

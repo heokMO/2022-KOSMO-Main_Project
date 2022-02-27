@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.co.kosmo.mvc.dto.SongVO;
+import kr.co.kosmo.mvc.dto.UserRecommendVO;
 import kr.co.kosmo.mvc.service.SongService;
 import kr.co.kosmo.mvc.service.UserRecommendService;
 
@@ -33,7 +34,11 @@ public class UserRecommendControler {
 	
     @RequestMapping(value="list")
     public String listUp(Model m) {
-    	m.addAttribute("list", urservice.getRecommend());
+    	List<UserRecommendVO> recmdList = urservice.get_list_limit();
+    	UserRecommendVO lastRecmd =  recmdList.get(recmdList.size() - 1);
+    	int lastId = lastRecmd.getId();
+    	m.addAttribute("list", recmdList);
+    	m.addAttribute("lastId", lastId);
     	return "userrecommend/list";
     }
     
@@ -84,4 +89,21 @@ public class UserRecommendControler {
 		}
 		return result;
 	}
+    @ResponseBody
+	@RequestMapping(value="addRecomendList", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public String addRecomendList(HttpServletRequest request) {			
+		String lastSongId = request.getParameter("last_song_id");
+		List<UserRecommendVO> recmdList = urservice.get_list_limit(Integer.parseInt(lastSongId));
+		
+		String result = "";
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			result = mapper.writeValueAsString(recmdList);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+    
+    
 }

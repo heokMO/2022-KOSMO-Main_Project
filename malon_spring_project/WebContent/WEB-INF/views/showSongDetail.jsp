@@ -10,7 +10,7 @@
 	<div class="content" style="margin-top: 50px">
 		<div class="song_info">
 			<div >
-				<input type="text" name="song_title" id="song_title" value="${songDetail.song_title}" readonly="readonly"">
+				<input type="text" name="song_title" id="song_title" value="${songDetail.song_title}" readonly="readonly">
 			</div>
 			<div>
 				<input type="text" name="song_album" id="song_album" value="${songDetail.song_album}" readonly="readonly">
@@ -27,12 +27,22 @@
 			<span id="testmsg">
 			</span>
 	</div>
+	<button id="showComment">showComment</button>
+</div>
+
+<div id="comment">
+	<form id="wirteComment" method="post">
+		<input name="comment_content">
+		<input type="submit" value="submit">
+	</form>
+	<div id="comment_list">
+		<p>test</p>
+	</div>
 </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
-
 var sessionId = "${sessionScope.sessionId}";
 var song_id = ${songDetail.song_id};
 var likeIt = ${likeit};
@@ -57,5 +67,4 @@ $('#likeBtn').click(function(){
 		});	
 	}
 });
-
 </script>

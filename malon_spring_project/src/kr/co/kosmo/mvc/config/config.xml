@@ -7,5 +7,6 @@
  		<typeAlias type="kr.co.kosmo.mvc.dto.MemVO" alias="memvo"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.SongVO" alias="songvo"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.UserRecommendVO" alias="user_recommend_vo"/>
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.UserCommentVO" alias="user_comment"/>
  	</typeAliases>
 </configuration>

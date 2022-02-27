@@ -16,8 +16,12 @@ public class UserRecommendService implements UserRecommendDAO{
 	private SqlSessionTemplate ss;
 	
 	@Override
-	public List<UserRecommendVO> getRecommend() {
-		return ss.selectList("user_recommend.get_list");
+	public List<UserRecommendVO> get_list_limit() {
+		return ss.selectList("user_recommend.get_list_limit");
+	}
+	@Override
+	public List<UserRecommendVO> get_list_limit(int lastSongId) {
+		return ss.selectList("user_recommend.add_list_limit", lastSongId);
 	}
 	
 	@Override
@@ -36,4 +40,5 @@ public class UserRecommendService implements UserRecommendDAO{
 		return null;
 	}
 	
+
 }

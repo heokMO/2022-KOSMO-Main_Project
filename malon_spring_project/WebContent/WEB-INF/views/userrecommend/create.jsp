@@ -17,9 +17,7 @@
 <div>
 	<label for="content"> Content </label>
 	<input name="content" id="content">
-</div> 
-
-    
+</div>     
 <div>
   <table id="songlist">
  	<tr>
@@ -29,14 +27,23 @@
     </tr>
   </table>
 </div>
+
 <%-- 글검색 폼 --%>
+
 <form name="searchFrm" style="margin-top: 20px;">
 	<input type="text" id="searchWord" name="searchWord" size="100" autocomplete="off">
 	<button type="button" class="btn btn-secondary btn-sm" onclick="goSearch()">검색</button>
 </form>
+
+<%--// 글검색 폼 --%>
+
+
 <%-- 검색어 자동완성이 보여질 구역 --%>
+
 <div id="displayList" style="border: solid 1px gray; height: 100px; overflow: auto; margin-left: 77px; margin-top; -1px; border-top: 0px;">
 </div>
+
+<%--// 검색어 자동완성이 보여질 구역 --%>
 
 <script>
 	$("#displayList").hide();
@@ -83,5 +90,4 @@
 			})
 		}
 	})
-
 </script>

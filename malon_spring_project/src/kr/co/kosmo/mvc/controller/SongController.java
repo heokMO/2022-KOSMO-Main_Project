@@ -45,6 +45,8 @@ public class SongController {
     	//곡의 좋아요 수 
     	int likeCnt = likeItService.getSongLikeCnt(song_id);
     	
+    	
+    	
     	m.addAttribute("likeit", likeIt);
     	m.addAttribute("songDetail",songVO);
     	m.addAttribute("likeCnt", likeCnt);

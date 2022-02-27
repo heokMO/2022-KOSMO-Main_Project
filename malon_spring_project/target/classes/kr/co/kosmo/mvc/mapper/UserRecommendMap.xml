@@ -12,9 +12,27 @@
 		<result column="THUMBS_UP" property="thumbsUp"/>
 	</resultMap>
 	
-	<select id="get_list" resultMap="user_recommend_info">
+	<select id="get_list_limit" resultMap="user_recommend_info">
+		select id, title, user_id, WRITTEN_TIME, THUMBS_UP 
+		from (
 		select id, title, user_id, WRITTEN_TIME, THUMBS_UP 
 		from RECOMMENDED_INFO
+		order by ID  desc)
+		<![CDATA[
+		 where ROWNUM <= 16
+		]]>
+	</select>
+	
+	<select id="add_list_limit" resultMap="user_recommend_info">
+		select *
+		from (
+			select id, title, user_id, WRITTEN_TIME, THUMBS_UP 
+			from RECOMMENDED_INFO
+			order by ID  desc)
+		<![CDATA[
+		 where ID < #{lastSongId}
+		 	and ROWNUM <= 16
+		]]>
 	</select>
 	
 	<select id="get_info" resultMap="user_recommend_info">
