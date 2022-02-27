@@ -1,5 +1,8 @@
 package kr.co.kosmo.mvc.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +34,25 @@ public class SongController {
 	return "redirect:/";
 	}
 	
+	@RequestMapping(value="likeOrNot", produces="application/json;charset=utf8", method=RequestMethod.GET)
+	@ResponseBody
+	public String getLikeIt(Model m, @RequestParam("songId") int song_id, HttpSession session) {
+    	LikeItVO likeVO = new LikeItVO();
+    	likeVO.setMem_acc_id((String) session.getAttribute("sessionId"));
+    	likeVO.setSong_id(song_id);
+    	String likeIt = Integer.toString(likeItService.getLikeIt(likeVO));
+		
+    	return likeIt;
+	}
+	
+	// TODO
     @GetMapping(value="showsongdetail")
 	public String showSongDetail(Model m, @RequestParam("songId") int song_id, HttpSession session) {
     	//로그인 한 유저의 해당 곡 좋아요 여부
     	LikeItVO likeVO = new LikeItVO();
     	likeVO.setMem_acc_id((String) session.getAttribute("sessionId"));
     	likeVO.setSong_id(song_id);
-    	int likeIt = likeItService.getLikeIt(likeVO);
+    	String likeIt = Integer.toString(likeItService.getLikeIt(likeVO));
     	
     	//해당 곡 정보
     	SongVO songVO = songService.getSongDetail(song_id);
@@ -45,31 +60,38 @@ public class SongController {
     	//곡의 좋아요 수 
     	int likeCnt = likeItService.getSongLikeCnt(song_id);
     	
-    	
-    	
     	m.addAttribute("likeit", likeIt);
     	m.addAttribute("songDetail",songVO);
     	m.addAttribute("likeCnt", likeCnt);
 		return "showSongDetail";
 	}
     
-    @RequestMapping(value="songLikeUpdate", produces="application/text;charset=utf8", method=RequestMethod.GET)
+    // TODO
+    @RequestMapping(value="songLikeUpdate", produces="application/json;charset=utf8", method=RequestMethod.GET)
     @ResponseBody
-    public String songLikeUpdate(Model m, @RequestParam("likeIt") int likeIt
+    public Map songLikeUpdate(Model m, @RequestParam("likeIt") String likeIt
     		, @RequestParam("songId") int song_id, HttpSession session) {
-    	String msg;
-    	if (session.getAttribute("sessionId") == null) {
-    		msg = "로그인 해 주세요.";
-    		m.addAttribute("msg", msg);
-    	}
     	
-    	if (likeIt == 0) {
-    		msg = "좋아요를 누르셨습니다.";
-    		m.addAttribute("msg", msg);
+    	LikeItVO likeVO = new LikeItVO();
+    	likeVO.setMem_acc_id((String) session.getAttribute("sessionId"));
+    	likeVO.setSong_id(song_id);
+    	
+    	Map<String, Object> map = new HashMap();
+    	
+    	if (likeIt.equals("0")) {
+    		likeItService.insertLike(likeVO);
+    		
+    		map.put("likeCnt", likeItService.getSongLikeCnt(song_id));
+    		map.put("likeIt", 1);
+    		
+    		return map;
     	} else {
-    		msg = "좋아요를 취소 하셨습니다.";
-    		m.addAttribute("msg", msg);
+    		likeItService.deleteLike(likeVO);
+    		
+    		map.put("likeCnt", likeItService.getSongLikeCnt(song_id));
+    		map.put("likeIt", 0);	
+    		
+    		return map;
     	}
-    	return msg;
     }
 }

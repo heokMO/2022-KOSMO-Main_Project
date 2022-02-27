@@ -78,6 +78,10 @@
 		})
 	})
 	
+	function gologin(e) {
+		e.preventDefault();
+		location.replace("member/loginPage");
+	}
 </script>
 		
 

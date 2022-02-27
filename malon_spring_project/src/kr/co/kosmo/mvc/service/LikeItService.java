@@ -25,4 +25,14 @@ public class LikeItService implements LikeItDAO{
 		return ss.selectOne("like_it.getLikeIt", likeVO);
 	}
 	
+	@Override
+	public void insertLike(LikeItVO likeVO) {
+		ss.insert("like_it.insertLike", likeVO);
+	}
+
+	@Override
+	public void deleteLike(LikeItVO likeVO) {
+		ss.delete("like_it.deleteLike", likeVO);
+	}
+	
 }
