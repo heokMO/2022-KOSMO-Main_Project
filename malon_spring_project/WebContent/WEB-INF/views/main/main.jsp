@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>       
-<div id="article">
-   <h1>어서오쇼</h1>
-</div>
-  <!-- Link Swiper's CSS -->
+
+<!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css"/>
 <link rel="stylesheet" href="/resources/css/test.css">
+<!-- //Link Swiper's CSS -->
+
 
 <!-- Swiper -->
 <section class="swiper-section">
@@ -37,6 +37,8 @@
 		<div class="swiper-pagination"></div>
 	</div>
 </section>
+<!-- //Swiper -->
+
 <!-- Detail -->
 <section id="songDetail">
 

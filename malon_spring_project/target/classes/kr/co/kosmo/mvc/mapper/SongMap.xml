@@ -6,7 +6,7 @@
 
 	<select id="getSonglist" resultType="songvo">
 	    <![CDATA[
-			SELECT * FROM song WHERE ROWNUM <= 5
+			SELECT * FROM song WHERE ROWNUM <= 8
 	  	]]>
 	</select>
 	
