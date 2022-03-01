@@ -17,8 +17,12 @@
 		</div>
 		
 		<div id="middle-menu">
-			<input type="text" id="search_word" name="search_word" placeholder="검색어를 입력해주세요">
+			<input type="text" id="mainSearch" name="search_word" placeholder="검색어를 입력해주세요">
 			<input type="button" id="searchBtn" name="searchBtn" value="검색">
+		</div>
+		<%-- 검색어 자동완성이 보여질 구역 --%>
+		<div id="searchList" style="border: solid 1px gray; height: 200px; overflow: auto; margin-left: 77px; margin-top; -1px; border-top: 0px;
+			position: relative; z-index: 2;">
 		</div>
 
 		<div id="right-menu" class="menu">
@@ -42,6 +46,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+	$('#searchList').hide();
+
 	function logoutConfirm() {
 		 if (confirm("로그아웃 하시겠습니까?") == true){    //확인
 			 window.location.href = '/member/logout';
@@ -54,6 +60,44 @@
 		e.stopPropagation();
 		logoutConfirm();
 	});
+	
+	$("#mainSearch").on("change keyup paste", function () {
+		if($("#mainSearch").val().length < 2){
+			$("#searchList").hide();
+		} else{
+			$.ajax({
+				url:"/userrecommend/wordSearchShow.action",
+				type:"get",
+				data:{"searchWord": $("#mainSearch").val() },
+				dataType:"json",
+				success:function(json){
+					if(json.length > 0){
+						var html = "";
+						$.each(json, function(index, item) {
+							var title = item.song_title;
+							var artist = item.song_artist;
+							var album = item.song_album;
+							html += "<button class='view_song' value=" + item.song_id + ">" + title +" / "+ artist +" / "+ album + "</button></br>";
+						})
+						$("#searchList").html(html);
+						$("#searchList").show();
+						$(".view_song").click(function() {
+							$.ajax({
+								url:"/song/showsongdetail",
+								type:"get",
+								data:{"songId": $(this).val()},
+								dataType:"html",
+								success:function(song_html){
+									$("#songDetail").html(song_html);
+								}
+							})
+						
+						})
+					}
+				}
+			})
+		}
+	})
 
 </script>
 
