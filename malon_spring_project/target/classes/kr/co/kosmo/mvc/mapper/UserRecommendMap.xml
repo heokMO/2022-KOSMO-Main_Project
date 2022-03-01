@@ -36,9 +36,9 @@
 	</select>
 	
 	<select id="get_info" resultMap="user_recommend_info">
-		select title, user_id, WRITTEN_TIME, THUMBS_UP, CONTENT 
+		select ID, title, user_id, WRITTEN_TIME, THUMBS_UP, CONTENT
 		from RECOMMENDED_INFO
-		where id=#{userRcmId }
+		where id= #{userRcmId }
 	</select>
 	
 	
@@ -51,6 +51,57 @@
   <![CDATA[ and ROWNUM <= 10]]>
         order by SONG_ID
 	</select>
+	
+	
+	<insert id="insert_play_list" parameterType="java.util.List" > 
+		<foreach collection="list" item="song" open="INSERT ALL" close="SELECT * FROM SYS.DUAL" separator=" "> 
+			INTO RECOMMENDED_PLAYLIST( 
+				id, song_id 
+			) VALUES ( 
+				RECOMMENDED_INFO_SEQ.CURRVAL, #{song} 
+			) 
+		</foreach> 
+	</insert>
+	
+	
+	<insert id="insert_play_list_info">
+		insert into RECOMMENDED_INFO (title, content, user_id) values (#{title},#{content},#{userID})
+	</insert>	
+	
+	
+	<select id="getPlayListDetail" resultType="songvo">
+		select SONG_ID, SONG_TITLE, SONG_ALBUM, SONG_ARTIST, SONG_IMG, SONG_GENRE, SONG_YOUTUBE_LINK from SONG where song_id in (
+		    select song_id from RECOMMENDED_PLAYLIST where id = #{userRcmId}
+		) 
+	</select>
+	
+	<delete id="deleteList">
+		delete from RECOMMENDED_PLAYLIST 
+		where id = #{userRcmId}
+	</delete>
+	
+	<delete id="deleteList_info">
+		delete from RECOMMENDED_INFO 
+		where id = #{userRcmId}
+	</delete>
+	
+	<update id="update_play_list_info">
+		  UPDATE RECOMMENDED_INFO
+		     SET title = #{title},
+		         content = #{content}
+		     WHERE id = #{id}
+	</update>
+	
+	<insert id="insert_new_play_list" parameterType="hashmap">
+		<foreach collection="_parameter.entrySet()" index="key" item="value" open="INSERT ALL" close="SELECT * FROM SYS.DUAL" separator=" "> 
+			INTO RECOMMENDED_PLAYLIST( 
+				id, song_id 
+			) VALUES ( 
+				#{value, jdbcType=INTEGER} , #{key, jdbcType=INTEGER} 
+			) 
+		</foreach> 
+	</insert>
+	
 </mapper>
 
 

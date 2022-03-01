@@ -1,6 +1,9 @@
 package kr.co.kosmo.mvc.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.co.kosmo.mvc.dto.SongVO;
 import kr.co.kosmo.mvc.dto.UserRecommendVO;
+import kr.co.kosmo.mvc.service.LikeItService;
 import kr.co.kosmo.mvc.service.SongService;
 import kr.co.kosmo.mvc.service.UserRecommendService;
 
@@ -32,6 +36,9 @@ public class UserRecommendControler {
 	@Autowired
 	private SongService songService;
 	
+	@Autowired
+	private LikeItService likeItService;
+	
     @RequestMapping(value="list")
     public String listUp(Model m) {
     	List<UserRecommendVO> recmdList = urservice.get_list_limit();
@@ -44,8 +51,18 @@ public class UserRecommendControler {
     
     @GetMapping(value="detail")
     public String detail(Model m, @RequestParam(name="userRcmId") int userRcmId) {
+    	List<SongVO> songList = urservice.getPlayListDetail(userRcmId);
     	
     	m.addAttribute("info", urservice.getInfo(userRcmId));
+    	m.addAttribute("play_list", songList);
+    	
+    	List<Integer> likeCntList = new ArrayList<>();
+    	
+    	for (SongVO song : songList) {	
+    		likeCntList.add(likeItService.getSongLikeCnt(song.getSong_id()));
+    	}
+    	
+    	m.addAttribute("likeCnt", likeCntList);
     	return "userrecommend/detail";
     }
     
@@ -89,9 +106,10 @@ public class UserRecommendControler {
 		}
 		return result;
 	}
+    
     @ResponseBody
-	@RequestMapping(value="addRecomendList", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public String addRecomendList(HttpServletRequest request) {			
+	@RequestMapping(value="addRecomendList")
+	public String addRecomendList(HttpServletRequest request, HttpSession session) {			
 		String lastSongId = request.getParameter("last_song_id");
 		List<UserRecommendVO> recmdList = urservice.get_list_limit(Integer.parseInt(lastSongId));
 		
@@ -104,6 +122,73 @@ public class UserRecommendControler {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value="addRecomend")
+	public String addRecomend(HttpServletRequest request, HttpSession session) {			
+		String id = (String) session.getAttribute("sessionId");
+		String listTitle = request.getParameter("title");
+		String listContent = request.getParameter("content");
+		
+		String songs = request.getParameter("songArr");
+				
+		List<Integer> realSongs = new ArrayList<>();
+		for (String song : songs.split(",")) {
+			realSongs.add(Integer.parseInt(song));
+		}
+		
+		UserRecommendVO userRecommendVO = new UserRecommendVO();
+		
+		userRecommendVO.setTitle(listTitle);
+		userRecommendVO.setContent(listContent);
+		userRecommendVO.setUserID(id);
+		
+		urservice.playListInsert(userRecommendVO,realSongs);
+
+		return "redirect:/userrecommend/list";
+	}
+	
+    @RequestMapping(value="playlistDelete")
+    public String playlistDelete(Model m, @RequestParam(name="userRcmId") int userRcmId) {
+    	urservice.deletelist(userRcmId);
+    	return "redirect:/userrecommend/list";
+    }
+	
+    @RequestMapping(value="playlistModify")
+    public String playlistModify(Model m, @RequestParam(name="userRcmId") int userRcmId) {
+    	
+    	// 곡정보 가져오기 
+    	List<SongVO> songList = urservice.getPlayListDetail(userRcmId);
+    	m.addAttribute("play_list", songList);
+    	
+    	// 플레이리스트 정보 가져오기
+    	m.addAttribute("info", urservice.getInfo(userRcmId));
+    	
+    	return "userrecommend/modify";
+    }
+    
+    @RequestMapping(value="updateRecomendList")
+	public String updateRecomendList(HttpServletRequest request) {
+		String listTitle = request.getParameter("title");
+		String listContent = request.getParameter("content");
+		int userRcmId = Integer.parseInt(request.getParameter("userRcmId"));
+		
+		//수정한 플레이리스트 곡들
+		String songs = request.getParameter("songArr");
+		Map<Integer,Integer> songlist = new HashMap<>();
+		for (String song : songs.split(",")) {
+			songlist.put(Integer.parseInt(song),userRcmId);
+		}
+			
+		UserRecommendVO userRecommendVO = new UserRecommendVO();
+		
+		userRecommendVO.setTitle(listTitle);
+		userRecommendVO.setContent(listContent);
+		userRecommendVO.setId(userRcmId);
+
+		urservice.playListUpdate(userRecommendVO, userRcmId, songlist);
+		
+    	return "redirect:/userrecommend/detail?userRcmId="+userRcmId;
+    }
     
     
 }

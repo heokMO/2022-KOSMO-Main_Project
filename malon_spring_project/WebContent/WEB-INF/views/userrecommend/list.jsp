@@ -20,10 +20,9 @@
 		<c:forEach var="e" items="${list }">
 		 	<ul class="list-group">
 			 	<li><img src="/resources/images/sampleUserRecom.jpg" class="sampleimg"></li>	
-				<li><a href="detail?userRcmId=${e.id }">title: ${e.title }</a></li>
-				<li>ID: ${e.id }</li>
-				<li>writtenTime: ${e.writtenTime }</li>
-				<li>thumbsUp: ${e.thumbsUp }</li>
+				<li><a href="detail?userRcmId=${e.id}">${e.title}</a></li>
+				<li>${e.writtenTime }</li>
+				<li>¡¡æ∆ø‰: ${e.thumbsUp }</li>
 			</ul>
 		</c:forEach>
 		<input type="hidden" id="lastId" value="${lastId }">
@@ -40,7 +39,7 @@
     $(window).scroll(function() {
         if($(window).scrollTop() + $(window).height()  >= $(document).height()) {
         	$.ajax({
-				url:"addRecomendList",
+				url:"/userrecommend/addRecomendList",
 				type:"get",
 				data:{"last_song_id": last_song_id},
 				dataType:"json",

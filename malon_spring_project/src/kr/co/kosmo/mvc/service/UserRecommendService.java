@@ -1,10 +1,12 @@
 package kr.co.kosmo.mvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.kosmo.mvc.dao.UserRecommendDAO;
 import kr.co.kosmo.mvc.dto.SongVO;
@@ -36,9 +38,33 @@ public class UserRecommendService implements UserRecommendDAO{
 
 	@Override
 	public SongVO getSong(String songId) {
-		
 		return null;
 	}
 	
-
+	@Transactional
+	@Override
+	public void playListInsert(UserRecommendVO userRecommendVO, List<Integer> realSongs) {
+		ss.insert("user_recommend.insert_play_list_info", userRecommendVO);
+		ss.insert("user_recommend.insert_play_list",realSongs);
+	}
+	
+	@Override
+	public List<SongVO> getPlayListDetail(int userRcmId) {
+		return  ss.selectList("user_recommend.getPlayListDetail", userRcmId);
+	}
+	
+	@Transactional
+	@Override
+	public void deletelist(int userRcmId) {
+		ss.delete("user_recommend.deleteList", userRcmId);
+		ss.delete("user_recommend.deleteList_info", userRcmId);
+	}
+	
+	@Transactional
+	@Override
+	public void playListUpdate(UserRecommendVO userRecommendVO, int userRcmId, Map<Integer, Integer> songlist) {
+		ss.update("user_recommend.update_play_list_info", userRecommendVO);
+		ss.delete("user_recommend.deleteList", userRcmId);
+		ss.insert("user_recommend.insert_new_play_list", songlist);
+	}
 }
