@@ -18,6 +18,13 @@
 	<delete id="deleteLike">
 		delete from like_it_list where song_id = #{song_id} and mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR}
 	</delete>
+	
+	<select id="getLikeItList" resultType="songvo">
+	select s.SONG_ID, s.SONG_TITLE, s.SONG_ALBUM, s.SONG_ARTIST, s.SONG_IMG, s.SONG_GENRE, s.SONG_YOUTUBE_LINK
+	  from like_it_list l, song s
+	 where l.song_id  = s.song_id 
+	   and l.mem_acc_id = #{sessionId, jdbcType=INTEGER}
+	</select>
 </mapper>
 
 

@@ -27,7 +27,7 @@
 	
 		<c:forEach var="e" items="${play_list}" varStatus="status">
 			<tr>
-				<td> 
+				<td><button class="theme_album" value="${e.song_id}" style="background-color:transparent; border: 0; outline:0;">
 					<img src="${e.song_img}" id="song_img" name="song_img" style="width: 25px; height: 25px">
 					${e.song_title} <br>
 					<td>${e.song_artist}</td>
@@ -47,6 +47,10 @@
 	</c:choose>
 </div>
 
+<section id="songDetail">
+
+</section>
+
 <script>
 $("#listDeleteBtn").click(function(){
 	 if (confirm("플레이 리스트를 삭제하시겠습니까?") == true){    //확인
@@ -58,5 +62,17 @@ $("#listDeleteBtn").click(function(){
 
 $("#listModifyBtn").click(function(){
 	document.location.href = "playlistModify?userRcmId=" + ${info.id};
+})
+
+$(".theme_album").click(function() {
+	$.ajax({
+		url:"/song/showsongdetail",
+		type:"get",
+		data:{"songId": $(this).val()},
+		dataType:"html",
+		success:function(song_html){
+			$("#songDetail").html(song_html);
+		}
+	})
 })
 </script>

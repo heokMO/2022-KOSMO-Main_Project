@@ -12,7 +12,7 @@
 			<ul>
 				<li><a href="/test" id="test">test</a></li>
 				<li><a href="/userrecommend/list" id="test">추천리스트</a></li>
-				<li><a href="/" id="myList">마이리스트</a></li>
+				<li><a href="/likeit/getList" id="myList">마이리스트</a></li>
 			</ul>
 		</div>
 		
@@ -46,6 +46,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+var sessionId = "${sessionScope.sessionId}";
 	$('#searchList').hide();
 
 	function logoutConfirm() {
@@ -98,6 +99,13 @@
 			})
 		}
 	})
-
+	
+$('#myList').click(function(e){
+	if ( sessionId == ""){
+		e.preventDefault();
+		alert("로그인 후 이용해주세요.");
+		 window.location.href = '/member/loginPage';
+	}
+})
 </script>
 

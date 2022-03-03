@@ -1,5 +1,7 @@
 package kr.co.kosmo.mvc.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -7,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.kosmo.mvc.dao.LikeItDAO;
 import kr.co.kosmo.mvc.dto.LikeItVO;
+import kr.co.kosmo.mvc.dto.SongVO;
 
 @Transactional
 @Repository
@@ -34,4 +37,8 @@ public class LikeItService implements LikeItDAO{
 		ss.delete("like_it.deleteLike", likeVO);
 	}
 	
+	@Override
+	public List<SongVO> getLikeItList(String sessionId) {
+		return ss.selectList("like_it.getLikeItList", sessionId);
+	}
 }
