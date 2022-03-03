@@ -16,6 +16,7 @@
 				<input type="text" name="song_album" id="song_album" value="${songDetail.song_album}" readonly="readonly">
 			</div>
 			<div>
+				<a href="artist/detail?song_artist=${songDetail.song_artist}" style="cursor:hand;">${songDetail.song_artist}</a>
 				<input type="text" name="song_artist" id="song_artist" value="${songDetail.song_artist}" readonly="readonly">
 			</div>
 		</div>

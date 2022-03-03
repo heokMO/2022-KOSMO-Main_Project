@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="artist">
+
+	<select id="getArtistDetail"  resultType="artistvo">
+		select a.name,
+		       a.img,
+		       nvl(l.fcnt, 0) fan_cnt
+		from artist a
+		left OUTER join (select artist, count(*) as fcnt
+		                from like_artist_list
+		                group by artist) l
+		on a.name = l.artist
+		where a.name = #{artist}
+	</select>
+	
+	<select id="getArtistSongs"  resultType="songvo">
+		select s.song_album,
+		       s.song_title,
+		       s.song_id,
+		        nvl(l.cnt, 0) song_cnt
+		from song s 
+		left OUTER join (select song_id, count(*) as cnt
+		                from like_it_list
+		                group by song_id) l
+		on s.song_id = l.song_id
+		where s.song_artist= #{artist}
+	</select>	
+</mapper>
+
+ 
+
+
+ 

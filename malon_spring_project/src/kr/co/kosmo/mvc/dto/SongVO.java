@@ -7,8 +7,14 @@ public class SongVO {
 	private String song_artist;
 	private String song_img;
 	private String song_genre;
+	private int song_cnt;
 	
-	
+	public int getSong_cnt() {
+		return song_cnt;
+	}
+	public void setSong_cnt(int song_cnt) {
+		this.song_cnt = song_cnt;
+	}
 	public int getSong_id() {
 		return song_id;
 	}

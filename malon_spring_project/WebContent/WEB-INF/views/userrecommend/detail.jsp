@@ -27,11 +27,13 @@
 	
 		<c:forEach var="e" items="${play_list}" varStatus="status">
 			<tr>
-				<td><button class="theme_album" value="${e.song_id}" style="background-color:transparent; border: 0; outline:0;">
+				<td>
+					<button class="theme_album" value="${e.song_id}" style="background-color:transparent; border: 0; outline:0;">
 					<img src="${e.song_img}" id="song_img" name="song_img" style="width: 25px; height: 25px">
-					${e.song_title} <br>
-					<td>${e.song_artist}</td>
+						${e.song_title}
+					</button><br>
 				</td>
+				<td>${e.song_artist}</td>
 				<td>${e.song_album}</td>
 				<td>${likeCnt[status.index]}</td>
 			</tr>
