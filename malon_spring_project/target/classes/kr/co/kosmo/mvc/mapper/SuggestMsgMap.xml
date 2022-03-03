@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace="suggest_msg">
+
+		<!--곡 보내기, 쿼리문 확인완료 -->
+		<insert id="send" parameterType="suggestmsgvo">
+			insert into SUGGEST_MSG values (#{song_id}, #{from_user}, #{to_user}, #{is_taken})
+		</insert>
+			      
+		<select id="get_list" resultType="suggestmsgvo">
+			select s.SONG_ID, s.SONG_TITLE, s.song_artist, m.mem_nick from_nick, sm.to_user, sm.is_taken
+			from SUGGEST_MSG sm,song s, mem m
+			where TO_USER = #{sessionId}
+			and s.song_id=sm.song_id
+            and sm.from_user=m.mem_acc_id
+		</select>
+		
+		<!-- 친구 검색시 자동완성 기능   돌아감-->
+		<select id="search_friends" resultType="memvo">
+			select MEM_NICK, MEM_EMAIL, MEM_ACC_ID
+			  from mem
+			 where MEM_NICK like '%' || #{searchFriend} || '%'
+		 		<![CDATA[ 
+		 		and ROWNUM <= 10
+		 		]]>
+		       order by mem_acc_id
+		</select>
+	</mapper>

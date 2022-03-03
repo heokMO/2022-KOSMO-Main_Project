@@ -13,6 +13,7 @@
 				<li><a href="/test" id="test">test</a></li>
 				<li><a href="/userrecommend/list" id="test">추천리스트</a></li>
 				<li><a href="/likeit/getList" id="myList">마이리스트</a></li>
+				<li><a href="/usersuggest/suggestdetail" id="getlist">보낸선물확인TEST</a></li>
 			</ul>
 		</div>
 		
@@ -37,6 +38,7 @@
 					<ul>
 						<li><a href="/member/updateDetail">${sessionScope.sessionNick}님</a></li>
 						<li><a id="logout">로그아웃</a></li>
+						<li><a href ="/usersuggest/usersuggest">선물하기test</a></li>
 					</ul>
 				</c:when>
 			</c:choose>
