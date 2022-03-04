@@ -4,48 +4,44 @@
 
 <div id="hgroup1">
 
-	<div id="menu_bar">
-		<a href="/" id="logo">
-			<img src="/resources/images/MALON_logo.png" id=logo_img>
-		</a>
-		<div id="left-menu" class="menu">
-			<ul>
-				<li><a href="/test" id="test">test</a></li>
-				<li><a href="/userrecommend/list" id="test">추천리스트</a></li>
-				<li><a href="/likeit/getList" id="myList">마이리스트</a></li>
-				<li><a href="/usersuggest/suggestdetail" id="getlist">보낸선물확인TEST</a></li>
-			</ul>
-		</div>
-		
-		<div id="middle-menu">
-			<input type="text" id="mainSearch" name="search_word" placeholder="검색어를 입력해주세요">
-			<input type="button" id="searchBtn" name="searchBtn" value="검색">
-		</div>
-		<%-- 검색어 자동완성이 보여질 구역 --%>
-		<div id="searchList" style="border: solid 1px gray; height: 200px; overflow: auto; margin-left: 77px; margin-top; -1px; border-top: 0px;
-			position: relative; z-index: 2;">
-		</div>
-
-		<div id="right-menu" class="menu">
-			<c:choose>
-				<c:when test="${sessionScope.sessionId == null}">
-					<ul>
-						<li><a href="/member/loginPage">로그인</a></li>
-						<li><a href="/member/joinForm">회원가입</a></li>
-					</ul>
-				</c:when>
-				<c:when test="${sessionScope.sessionId != null}">
-					<ul>
-						<li><a href="/member/updateDetail">${sessionScope.sessionNick}님</a></li>
-						<li><a id="logout">로그아웃</a></li>
-						<li><a href ="/usersuggest/usersuggest">선물하기test</a></li>
-					</ul>
-				</c:when>
-			</c:choose>
-		</div>
-	</div>
+   <div id="menu_bar">
+      <a href="/" id="logo">
+         <img src="/resources/images/MALON_logo.png" id=logo_img>
+      </a>
+      <div id="left-menu" class="menu">
+         <ul>
+            <li><a href="/test" id="test" data-hover="test">test</a></li>
+            <li><a href="/userrecommend/list" id="test" data-hover="추천리스트">추천리스트</a></li>
+            <li><a href="/" id="myList" data-hover="마이리스트">마이리스트</a></li>
+         </ul>
+      </div>
+      <div id="middle-menu">
+         <input type="text" id="mainSearch" name="search_word" placeholder="검색어를 입력해주세요">   
+         <input type="button" class="searchBtn" name="searchBtn" value="🔍">
+         <%-- 검색어 자동완성이 보여질 구역 --%>
+         <div id="searchList">
+         </div>
+      </div>
+      <div id="right-menu" class="menu">
+         <c:choose>
+            <c:when test="${sessionScope.sessionId == null}">
+               <ul>
+                  <li><a href="/member/loginPage" data-hover="로그인">로그인</a></li>
+                  <li><a href="/member/joinForm" data-hover="회원가입">회원가입</a></li>
+                  <li><a href="/usersuggest/suggestdetail" id="getlist">보낸선물확인</a></li>
+               </ul>
+            </c:when>
+            <c:when test="${sessionScope.sessionId != null}">
+               <ul>
+                  <li><a href="/member/updateDetail" data-hover="${sessionScope.sessionNick}님">${sessionScope.sessionNick}님</a></li>
+                  <li><a id="logout" data-hover="로그아웃">로그아웃</a></li>
+                  <li><a href ="/usersuggest/usersuggest" data-hover="선물하기">선물하기</a></li>
+               </ul>
+            </c:when>
+         </c:choose>
+      </div>
+   </div>
 </div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 var sessionId = "${sessionScope.sessionId}";

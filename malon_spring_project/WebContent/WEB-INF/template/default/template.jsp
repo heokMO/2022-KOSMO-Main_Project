@@ -12,14 +12,11 @@
 </head>
 <body>
 	<tiles:insertAttribute name="menu"/>
-   <hr>
-   <div id="wrap">
-      <tiles:insertAttribute name="body"/>
-   </div>
-   <div id="footer1">
-	   <hr>
-	      <tiles:insertAttribute name="footer"/>
-	   <hr>
-   </div>
+	<div id="wrap">
+		<tiles:insertAttribute name="body"/>
+	</div>
+	<div id="footer1">
+		<tiles:insertAttribute name="footer"/>
+	</div>
 </body>
 </html>
