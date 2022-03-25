@@ -25,6 +25,17 @@
 	 where l.song_id  = s.song_id 
 	   and l.mem_acc_id = #{sessionId, jdbcType=INTEGER}
 	</select>
+	
+	<select id="getGenreCnt" parameterType="hashmap" resultType="_int">
+	select count(*), song_genre 
+	  from (
+	  	select s.SONG_GENRE
+		  from like_it_list l, song s
+		 where l.song_id  = s.song_id 
+		   and l.mem_acc_id = #{sessionId}
+	  ) s
+	 where s.song_genre = #{genre} group by s.song_genre
+	</select>
 </mapper>
 
 

@@ -1,23 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="/resources/css/menu.css">
 
 <div id="hgroup1">
 
    <div id="menu_bar">
+     <div id="logobox">
       <a href="/" id="logo">
          <img src="/resources/images/MALON_logo.png" id=logo_img>
       </a>
+      </div>
       <div id="left-menu" class="menu">
          <ul>
-            <li><a href="/test" id="test" data-hover="test">test</a></li>
             <li><a href="/userrecommend/list" id="test" data-hover="추천리스트">추천리스트</a></li>
-            <li><a href="/" id="myList" data-hover="마이리스트">마이리스트</a></li>
+            <li><a href="/mylist/getlikeList" id="myList" data-hover="마이리스트">마이리스트</a></li>
          </ul>
+
+         
       </div>
       <div id="middle-menu">
          <input type="text" id="mainSearch" name="search_word" placeholder="검색어를 입력해주세요">   
-         <input type="button" class="searchBtn" name="searchBtn" value="🔍">
+         <button type="button" class="searchBtn">
+         <img src="/resources/images/search.png" id="search" name="likeBtn" style="width: 15px; height: 15px">
+         </button>	
          <%-- 검색어 자동완성이 보여질 구역 --%>
          <div id="searchList">
          </div>
@@ -25,10 +31,10 @@
       <div id="right-menu" class="menu">
          <c:choose>
             <c:when test="${sessionScope.sessionId == null}">
-               <ul>
+			   <ul>
                   <li><a href="/member/loginPage" data-hover="로그인">로그인</a></li>
                   <li><a href="/member/joinForm" data-hover="회원가입">회원가입</a></li>
-                  <li><a href="/usersuggest/suggestdetail" id="getlist">보낸선물확인</a></li>
+                  <li><a  href ="/usersuggest/usersuggest" id="send_gift" data-hover="선물하기">선물하기</a></li>
                </ul>
             </c:when>
             <c:when test="${sessionScope.sessionId != null}">
@@ -36,14 +42,27 @@
                   <li><a href="/member/updateDetail" data-hover="${sessionScope.sessionNick}님">${sessionScope.sessionNick}님</a></li>
                   <li><a id="logout" data-hover="로그아웃">로그아웃</a></li>
                   <li><a href ="/usersuggest/usersuggest" data-hover="선물하기">선물하기</a></li>
-               </ul>
-            </c:when>
-         </c:choose>
+               	  <li><a href ="/addfriend/addedfriend" data-hover="친구맺기">친구맺기</a></li>
+               	  <!-- 관리자 페이지 -->
+                  <c:set var="name" value="${sessionScope.sessionId}" />
+				  <c:if test="${name eq 'mimimi'}">				  	 
+				  	<li><a id="adminlogout" href="http://192.168.50.225:3000/" data-hover="관리자모드">관리자모드</a></li>
+				  </c:if>
+               </ul>           		
+            </c:when>     	      
+         </c:choose>      
+         
       </div>
    </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script type="text/javascript">
+
+
+
+
 var sessionId = "${sessionScope.sessionId}";
 	$('#searchList').hide();
 
@@ -58,6 +77,10 @@ var sessionId = "${sessionScope.sessionId}";
 	$('#logout').click(function(e){
 		e.stopPropagation();
 		logoutConfirm();
+	});
+	
+	$('#adminlogout').click(function(e){
+		window.location.href = '/member/logout';
 	});
 	
 	$("#mainSearch").on("change keyup paste", function () {
@@ -88,6 +111,8 @@ var sessionId = "${sessionScope.sessionId}";
 								dataType:"html",
 								success:function(song_html){
 									$("#songDetail").html(song_html);
+							         const offset = $("#songDetail").offset(); 
+							         $('html, body').animate({scrollTop: offset.top}, 500);
 								}
 							})
 						
@@ -101,9 +126,78 @@ var sessionId = "${sessionScope.sessionId}";
 $('#myList').click(function(e){
 	if ( sessionId == ""){
 		e.preventDefault();
-		alert("로그인 후 이용해주세요.");
 		 window.location.href = '/member/loginPage';
 	}
 })
+$('#send_gift').click(function(e){
+	if ( sessionId == ""){
+		e.preventDefault();
+		 window.location.href = '/member/loginPage';
+	}
+})
+
+//GeoLocation part
+	window.onload = function() {
+			findGeoLoaction();
+		}
+	
+		
+	function findGeoLoaction() {
+		// Geolocation API를 지원 여부 확인 실시
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(findLocation, showErrorMsg);
+		} else {
+			console.log("");
+			console.log("findLocation : Geolocation API Not Enable");    		
+			console.log("");
+		}
+
+
+		// 위치 확인 내부 함수 정의
+		function findLocation(position) {
+			var lat = position.coords.latitude;
+			var lng = position.coords.longitude;
+			console.log(lat, "test");
+			$.ajax({
+				url:"/weather/getWeather",
+				type:"get",
+				data:{"lat": lat,
+					  "lng": lng},
+				dataType:"json",
+				success:function(json){
+					document.getElementById("weather").value = json.precipitation;
+				}
+			})
+		
+		};
+
+
+		// 에러 확인 내부 함수 정의
+		function showErrorMsg(error) {
+			console.log("");
+			console.log("showErrorMsg : error : " + error.code);
+			 switch(error.code) {
+			 	case error.PERMISSION_DENIED:
+			 		console.log("showErrorMsg : error : " + "Geolocation API의 사용 요청을 거부했습니다");
+			 		break;
+
+			 	case error.POSITION_UNAVAILABLE:
+			 		console.log("showErrorMsg : error : " + "위치 정보를 사용할 수 없습니다");
+			 		break;
+
+			 	case error.TIMEOUT:
+			 		console.log("showErrorMsg : error : " + "위한 요청이 허용 시간을 초과했습니다");
+			 		break;
+
+			 	case error.UNKNOWN_ERROR:
+			 		console.log("showErrorMsg : error : " + "알 수 없는 오류가 발생했습니다");
+			 		break;
+			 }    			    			    			
+		};
+	};
+
+
+
+
 </script>
 

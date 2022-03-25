@@ -85,6 +85,11 @@
 		where id = #{userRcmId}
 	</delete>
 	
+	<delete id="deleteList_mem">
+		delete from LIKE_RECOMMEND_LIST 
+		where id = #{userRcmId}
+	</delete>
+	
 	<update id="update_play_list_info">
 		  UPDATE RECOMMENDED_INFO
 		     SET title = #{title},
@@ -101,6 +106,25 @@
 			) 
 		</foreach> 
 	</insert>
+	
+	<select id="getLikeIt" resultType="_int">
+		select count(*) from LIKE_RECOMMEND_LIST where id = #{id} and mem_acc_id = #{mem_acc_id, jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="insertLike">
+		insert into LIKE_RECOMMEND_LIST (mem_acc_id,id) values (#{mem_acc_id, jdbcType=VARCHAR}, #{id})
+	</insert>
+	
+	<update id="updateThumbsUp">
+		update recommended_info set thumbs_up = thumbs_up + 1 where id = #{id}
+	</update>
+	
+	<select id="getListImg" resultType="string">
+		select s.song_img, r.id from song s,RECOMMENDED_PLAYLIST r where s.song_id = r.song_id and r.id = #{id} and 
+		 <![CDATA[
+		 rownum <=1
+		]]>
+	</select>
 </mapper>
 
 

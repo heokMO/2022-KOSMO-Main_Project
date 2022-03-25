@@ -9,6 +9,9 @@
  		<typeAlias type="kr.co.kosmo.mvc.dto.UserRecommendVO" alias="user_recommend_vo"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.UserCommentVO" alias="user_comment"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.ArtistVO" alias="artistvo"/>
- 		<typeAlias type="kr.co.kosmo.mvc.dto.SuggestMsgVO" alias="suggestmsgvo"/>
+  		<typeAlias type="kr.co.kosmo.mvc.dto.SuggestMsgVO" alias="suggestmsgvo"/>		
+  		<typeAlias type="kr.co.kosmo.mvc.dto.FriendVO" alias="friendvo"/>
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.FriendWaitVO" alias="friendwaitvo"/>
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.LikeArtistVO" alias="likeartistvo"/>
  	</typeAliases>
 </configuration>

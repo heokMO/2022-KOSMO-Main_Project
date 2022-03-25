@@ -1,0 +1,144 @@
+@charset "EUC-KR";
+
+.container {
+	display: flex;
+	width: 100%;
+}
+.container > div{
+	width: 50%;
+}
+.container .right {
+	margin-left: 50px;
+}
+
+
+/* 친구 서브 메뉴바  */
+#friend_sub_menu_bar {
+  overflow: hidden;
+  width: 100% ;
+  height: 3em;
+  margin: 0 auto;
+  font-family: 'NanumBarunGothic';
+  border-bottom: 1px solid #999;
+}
+.permission_wait_frd {
+	margin-top: 100px;
+}
+
+#mask {
+  height: 5em;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#list {
+  display: inline-table;
+  margin: 0 auto;
+  max-width: 100%;
+}  
+#list li {
+  display: table-cell;
+}
+#list li a {
+  display: block;
+  padding: 0 1em;
+  text-decoration: none;
+  color: black;
+  height: 3em;
+  line-height: 3;
+}
+#list li a:hover {
+  border-bottom: 2px solid black;
+  background-color: #c0c0c0;
+  color: black;
+}
+
+#add_friendFrm{
+	display: flex;
+	
+}
+#frmBtn{
+	display: contents; 
+}
+/* 검색창 */
+.input_wrap{
+	display: inline-block;
+    position: relative;
+    width: 251px;
+    height: 22px;
+    border-bottom: 1px solid #ccc;
+    vertical-align: bottom;
+    z-index: 10;
+}
+
+#friend_list, #permission_wait_frd{
+	margin-right: 45px;
+	overflow:auto;
+	height: 160px;
+	background: #ffffff;
+	box-shadow:  -6px 6px 22px #f2f2f2, 6px -6px 22px #ffffff;
+	opacity: 77%
+}
+
+#real_friend{
+	position: relative;
+	left: 30px;
+}
+
+#friend_Search  {
+	background-color: transparent;
+    float: left;
+    width: 205px;
+    height: 19px;
+    padding-left: 10px;
+    border: 0;
+    color: #606060;
+    font-size: 14px;
+    font-family: "맑은 고딕","Malgun Gothic";
+    vertical-align: top;
+}
+
+#search_frd {
+	width: 100%;
+    height: 30px;
+	margin-top: 30px;
+	padding: 0;
+	border : solid 1px rgba(0, 0, 0, 0);
+}
+.title {
+	font-size: 1.2em;
+}
+/* 연관검색어 리스트  */
+#searchFriendList {
+	width: 300px;
+	height: 250px;
+	overflow: auto;
+	margin-left: 40px; 
+	margin-top: -1px;
+	border-top: 0px;
+	position: absolute; 
+	z-index: 2;
+	background-color: rgba(255,255,255,0.5);
+	border: 1px solid #bbb;
+	cursor: pointer;
+}
+#searchFriendList button {
+	width: 100%;
+	height: 40px;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    background-color: #fff;
+    font-family: 'Arita-dotum-Medium';
+    border: 0;
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    outline: 0;
+    cursor: pointer;
+    
+}
+#searchFriendList button:hover {
+	background: gray;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+	color: #fff;
+}

@@ -1,0 +1,186 @@
+@charset "EUC-KR";
+
+/* 헤더 CSS */
+#hgroup1 {
+   width: 1200px;
+   height: 100px;
+   margin: 0 auto;
+}
+#menu_bar {
+   width: 1200px;
+   height: 100px;
+   margin: 20px auto 0;
+}
+#left-menu {
+   width: 200px;
+   height: 60px;
+   margin-top: 20px;
+   margin-left: 0;
+   float: left;
+    position: relative;
+}
+#middle-menu {
+   width: 400px;
+   height: 100px;
+    text-align: center;
+    margin: 8px auto 0;
+    float: left;
+    position: relative;
+}
+#right-menu {
+	height: 100px;
+   float: right;
+   margin-top: 20px;
+   margin-right: 0;
+}
+
+.menu_login{
+   width: 500px;
+}
+
+.menu_logout{
+   width: 300px;
+}
+
+/* 메뉴 버튼 CSS */
+.menu {
+   font-family: 'Arita-dotum-Medium';
+   text-align: center;
+   text-transform: uppercase;
+   font-weight: 500;
+   margin: 0;
+   padding: 0;
+}
+.menu * {
+   box-sizing: border-box;
+   -webkit-transition: all 0.35s ease;
+   transition: all 0.35s ease;
+}
+.menu ul {
+   display: inline-block;
+   padding: 0;
+   margin: 0;
+}
+.menu li {
+   display: inline-block;
+   list-style: outside none none;
+   margin: 0 0 0 20px;
+   overflow: hidden;
+}
+.menu a {
+   padding: 0.3em 0;
+   color: rgba(0, 0, 0, 0.7);
+   position: relative;
+   display: inline-block;
+   letter-spacing: 1px;
+   margin: 0;
+   text-decoration: none;
+   font-family: 'NanumBarunGothic';
+}
+
+.menu a:before,
+.menu a:after {
+   position: absolute;
+   -webkit-transition: all 0.35s ease;
+   transition: all 0.35s ease;
+}
+.menu a:before {
+   top: 100%;
+   display: block;
+   height: 3px;
+   width: 100%;
+   content: "";
+   background-color: #c0392b;
+}
+.menu a:after {
+   padding: 0.3em 0;
+   position: absolute;
+   top: 100%;
+   left: 0;
+   content: attr(data-hover);
+   color: black;
+   white-space: nowrap;
+   font-family: 'NanumBarunGothic';
+}
+
+.menu li:hover a,
+.menu .current a {
+   transform: translateY(-100%);
+}
+
+/* logo CSS */
+#logobox {
+	width: 100px;
+	height: 60px;
+	margin: 18px 0 0;
+	float: left;
+    position: relative;
+}
+
+#logo {
+	width: 100px;
+	height: 40px;
+	text-decoration: none;
+	margin: 0;
+}
+#logo_img {
+	width: 100px;
+	height: 40px;
+
+}
+
+/* 검색창 */
+#mainSearch {
+	width: 250px;
+	height: 10px;
+    border-radius: 20px;
+    border: 1px solid #bbb;
+    margin: 10px 0;
+    padding: 10px 12px;
+}
+
+/* 검색 버튼  */
+.searchBtn {
+   width: 30px;
+   height: 30px;
+   position: relative;
+   margin: 0;
+   border: 0;
+   background-color: rgba(255,255,255,0);
+}
+/* 연관검색어 리스트  */
+#searchList {
+	width: 350px;
+	height: 400px;
+	overflow: auto;
+	margin-left: 40px; 
+	margin-top: -1px;
+	border-top: 0px;
+	position: absolute; 
+	z-index: 2;
+	background-color: rgba(255,255,255,0.5);
+	border: 1px solid #bbb;
+	cursor: pointer;
+}
+
+#searchList button {
+	width: 100%;
+	height: 40px;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    background-color: #fff;
+    font-family: 'Arita-dotum-Medium';
+    border: 0;
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    outline: 0;
+    cursor: pointer;
+}
+
+#searchList button:hover {
+	background: gray;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+	color: #fff;
+}
+

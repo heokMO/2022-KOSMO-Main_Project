@@ -11,21 +11,43 @@
 		</insert>
 			      
 		<select id="get_list" resultType="suggestmsgvo">
-			select s.SONG_ID, s.SONG_TITLE, s.song_artist, m.mem_nick from_nick, sm.to_user, sm.is_taken
+			select s.SONG_ID, s.SONG_TITLE, s.song_artist, s.song_img, m.mem_nick to_nick, sm.ID, sm.to_user, sm.is_taken
+			from SUGGEST_MSG sm,song s, mem m
+			where FROM_USER = #{sessionId}
+			and s.song_id=sm.song_id
+            and sm.to_user=m.mem_acc_id
+		</select>
+		
+		<!-- TODO: 수정 -->
+		<!-- 친구 검색시 자동완성 기능   돌아감-->
+		<select id="search_friends" parameterType="hashmap" resultType="memvo">
+			select m.MEM_NICK, m.MEM_EMAIL, m.MEM_ACC_ID
+			  from mem m, FRIEND f
+			 where m.MEM_ACC_ID = f.friendid
+			    and MEM_NICK like '%' || #{searchFriend} || '%'
+			    and f.USERID = #{sessionId}
+			   order by mem_acc_id
+		</select>
+		
+		<!-- TODO: 받은 추천 리스트 -->
+		<select id="get_received_list" resultType="suggestmsgvo">
+			select s.SONG_ID, s.SONG_TITLE, s.song_artist, s.song_img, m.mem_nick from_nick, sm.ID, sm.from_user, sm.to_user, sm.is_taken
 			from SUGGEST_MSG sm,song s, mem m
 			where TO_USER = #{sessionId}
 			and s.song_id=sm.song_id
             and sm.from_user=m.mem_acc_id
 		</select>
 		
-		<!-- 친구 검색시 자동완성 기능   돌아감-->
-		<select id="search_friends" resultType="memvo">
-			select MEM_NICK, MEM_EMAIL, MEM_ACC_ID
-			  from mem
-			 where MEM_NICK like '%' || #{searchFriend} || '%'
-		 		<![CDATA[ 
-		 		and ROWNUM <= 10
-		 		]]>
-		       order by mem_acc_id
-		</select>
+		<update id="update_taken">
+			update SUGGEST_MSG set IS_TAKEN = 't' where ID = #{suggestMsgId}
+		</update>
+		
+		<insert id="insert_suggest" parameterType="java.util.List">
+		    INSERT into SUGGEST_MSG (ID, SONG_ID, FROM_USER, TO_USER, IS_TAKEN)
+		    SELECT SUGGEST_MSG_SEQ.nextval, A.* FROM(
+		    <foreach item="item" collection="list" separator="UNION ALL " >
+		        select #{item.song_id}, #{item.from_user}, #{item.to_user}, 'f'
+		        from dual
+		    </foreach>) A
+		</insert>
 	</mapper>

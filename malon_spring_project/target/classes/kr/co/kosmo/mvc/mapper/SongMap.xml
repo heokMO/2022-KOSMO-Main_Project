@@ -6,7 +6,23 @@
 
 	<select id="getSonglist" resultType="songvo">
 	    <![CDATA[
-			SELECT * FROM song WHERE ROWNUM <= 8
+			select * from song where ROWNUM < 9 order by dbms_random.value
+	  	]]>
+	</select>
+	
+	<select id="getSonglistBythema" resultType="songvo">
+	    <![CDATA[
+			select * from song where SONG_THEMA = #{thema } and ROWNUM < 9 order by dbms_random.value
+	  	]]>
+	</select>
+	
+	<select id="getSonglistBythemaWithoutRecord" parameterType="hashMap" resultType="songvo">
+	    <![CDATA[
+			select * from song 
+			where SONG_THEMA = #{thema }
+			and song_id not in (select song_id from song_record where mem_acc_id= #{memACCId })
+			and ROWNUM < 9 
+			order by dbms_random.value
 	  	]]>
 	</select>
 	
@@ -14,6 +30,24 @@
 			SELECT * FROM song WHERE song_id = #{song_id }
 	</select>
 	
+	<select id="getSongCnt" resultType="_int">
+		select count(*) from song
+	</select>
+	
+	<insert id="recordSong" parameterType="hashMap">
+		insert into song_record (song_id, mem_acc_id)
+		values (#{song_id}, #{session_id})
+	</insert>
+	
+	<select id="getThemaComment" resultType="string">
+		select thema_comment from recommend_thema where thema_code = #{thema }
+	</select>
+	
+	<delete id="deleteUserSongRecord">
+		<![CDATA[
+			delete from song_record where record_time < (sysdate - 1)
+		]]>
+	</delete>
 </mapper>
 
 

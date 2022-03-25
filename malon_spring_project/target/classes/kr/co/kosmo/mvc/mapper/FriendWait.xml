@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+   <mapper namespace="friendWait">
+	
+	<!--TODO: 추가 허락 대기중 목록 -->
+	<select id="get_wait_friend" resultType="friendwaitvo">
+		select FRIENDID from FRIEND_WAIT where USERID = #{sessionId}
+	</select>
+
+
+   <!--친구요청시 대기  -->
+	<insert id="insert_friend_wait" parameterType="friendwaitvo" > 
+		insert into friend_wait values( #{userId}, #{friendId})
+	</insert>
+	
+	<!--내가 받은 친구요청 확인-->
+	<select id="confirm_friend_wait" resultType="friendwaitvo"> 
+		select userId from friend_wait where friendId = #{sessionId}
+	</select>
+	
+	<!-- 요청받은 친구 삭제 -->
+	<delete id="delete_friend_wait" parameterType="java.util.HashMap" >
+		delete friend_wait where userId in
+		<foreach collection="_parameter.entrySet()" item="value" index="key">
+			<foreach collection="value" item="item" index = "idx" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+			and friendId in #{key}
+		</foreach>
+	</delete>
+	
+	<!-- 요청받은 친구 수락 -->
+	<insert id="accept_friend_wait" parameterType="java.util.HashMap" >
+	      <foreach collection="_parameter.entrySet()" item="value" index="key">
+	         <foreach collection="value" item="item" index = "idx" open="INSERT ALL" close="SELECT * FROM SYS.DUAL" separator=" ">
+	       	  INTO friend( 
+	            userId,friendId
+	         ) VALUES
+	         (   
+	            #{item}, 
+	            #{key} 
+	         )
+	         </foreach> 
+	      </foreach>
+	  </insert>
+	
+	
+	<insert id="accept_friend_wait2" parameterType="java.util.HashMap" >
+	      <foreach collection="_parameter.entrySet()" item="value" index="key">
+	         <foreach collection="value" item="item" index = "idx" open="INSERT ALL" close="SELECT * FROM SYS.DUAL" separator=" ">
+	         INTO friend( 
+	            friendId,userId
+	         ) VALUES 
+	         (   
+	            #{item}, 
+	            #{key} 
+	         )
+	         </foreach> 
+	      </foreach>
+	  </insert>
+   </mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="like_artist">
+	<select id="getArtistLikeCnt" resultType="_int">
+		select count(*) from like_artist_list where artist = #{artist}
+	</select>
+
+	<select id="getLikeArtist" resultType="_int">
+		select count(*) from like_artist_list where artist = #{artist} and user_id = #{user_id, jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="insertLike">
+		insert into like_artist_list (user_id,artist) values (#{user_id, jdbcType=VARCHAR}, #{artist})
+	</insert>
+	
+	<delete id="deleteLike">
+		delete from like_artist_list where artist = #{artist} and user_id = #{user_id, jdbcType=VARCHAR}
+	</delete>
+</mapper>
+
+
+

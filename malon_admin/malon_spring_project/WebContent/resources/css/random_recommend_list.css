@@ -1,0 +1,54 @@
+@charset "EUC-KR";
+#randomRecomendList {
+	width: 100%; 
+	height: 80%;
+	display: inline-block;  
+	margin: 0; 
+	padding: 0;
+}
+.list-group {
+	width: 210px; 
+	height: 310px;
+	display: block; 
+	float: left; 
+	margin: 0 9px 30px; 
+	padding: 0;
+	list-style: none; 
+	border : solid 1px rgba(0, 0, 0, 0.1);
+}
+.sampleimg {
+	width: 210px;
+	height: 210px;
+}
+#random_recommend_title_li{
+	height: 42px;
+	margin: 15px 15px 5px;
+	color: rgba(0, 0, 0, 1);
+	letter-spacing: -1px;
+	text-decoration: none;
+	font-family: 'NanumBarunGothic';
+	font-size: 18px;
+	overflow: hidden;
+}
+#random_recommend_artist_li{
+	color: rgba(0, 0, 0, 1);
+	font-family: 'Arita-dotum-Medium';
+	font-size: 14px;
+	margin: 0 15px;
+}
+
+/* ³ª´®¹Ù¸¥°íµñ */
+@font-face {
+   font-family: 'NanumBarunGothic';
+   font-style: normal;
+   font-weight: 400;
+   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+/* ¾Æ¸®µûµ¸¿ò */ 
+@font-face {
+   font-family: 'Arita-dotum-Medium';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff%27) format('woff');
+   font-weight: normal;
+   font-style: normal;
+}

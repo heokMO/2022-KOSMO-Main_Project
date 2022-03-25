@@ -1,0 +1,62 @@
+@charset "EUC-KR";
+
+/* 보낸 추천 리스트 */
+.my_like_list{
+	width: 100%;
+	height: 500px;
+	padding: 0;
+}
+#my_like_list_info{
+	width: 100%;
+	height: 100px;
+	margin-top: 15px;
+	border-bottom : 1px solid rgba(0, 0, 0, 1);
+}
+.theme_album{
+	width: 480px;
+	height: 100px;
+	background-color:transparent; 
+	border: 0; 
+	outline:0;
+	cursor: pointer;
+}
+#suggest_song_img{
+	width: 80px; 
+	height: 80px;
+	float: left;
+}
+#title_block{
+	width: 100%;
+	height: 30px;
+	display: block;
+	text-align: left;
+	margin: 15px 100px 0;
+	font-family: 'Arita-dotum-Medium';
+	font-size: 13px;
+}
+.like_info{
+	font-family: 'Arita-dotum-Medium';
+	font-size: 16px;
+	font-weight: bold;
+}
+.like_info input{
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+/* 나눔바른고딕 */
+@font-face {
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 400;
+	src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+	src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+/* 아리따돋움 */ 
+@font-face {
+   font-family: 'Arita-dotum-Medium';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff%27) format('woff');
+   font-weight: normal;
+   font-style: normal;
+}

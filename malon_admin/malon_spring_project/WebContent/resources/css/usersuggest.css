@@ -1,0 +1,68 @@
+@charset "EUC-KR";
+
+/* 모든 버튼 */
+.btn-normal.to{
+	border-radius: 8px;
+    font-size: 12px;
+	width: 43px;
+    height: 10px;
+    padding-bottom: 25px;
+}
+#frinedList, #displayList {
+	width: 350px;
+	height: 400px;
+	overflow: auto;
+	margin-left: 130px; 
+	margin-top: -1px;
+	border-top: 0px;
+	position: absolute; 
+	z-index: 2;
+	background-color: rgba(255,255,255,0.5);
+	border: 1px solid #bbb;
+	cursor: pointer;
+}
+
+#frinedList button{
+  padding: 0;
+  margin:0;
+  color: #fff;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  display:inline-block;
+  
+}
+
+#frinedList button::before{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 80px;
+	z-index: -1;
+	background-color: #000;
+	-webkit-transform: scaleY(.3);
+	transform: scaleY(.3);
+	opacity: 0;
+	transition: all .3s
+}
+
+#frinedList button:hover{
+  color:#6098FF;  
+}
+#frinedList button:hover::before{
+  opacity: 1;
+  background-color: #fff;
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  transition: -webkit-transform .6s cubic-bezier(.08, .35, .13, 1.02), opacity .4s;
+  transition: transform .6s cubic-bezier(.08, .35, .13, 1.02), opacity
+}
+
+
+/*자동검색어 form*/
+

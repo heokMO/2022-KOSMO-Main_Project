@@ -1,0 +1,163 @@
+@charset "EUC-KR";
+
+/* 플레이리스트 제목 */
+legend{
+	font-family: 'NanumBarunGothic';
+	font-size: 26px;
+}
+/* 소개글 */
+#explain_comment{
+	font-family: 'NanumBarunGothic';
+	font-size: 20px;
+}
+
+/* 추천리스트 정보 */
+.recommend_detail_info{
+	width: 100%;
+	height: 290px;
+	margin-top: 30px;
+	padding: 0;
+	border : solid 1px rgba(0, 0, 0, 0.1);
+}
+/* 추천리스트 사진 */
+.recommend_detail_info_img{
+	width: 250px;
+	height: 250px;
+	margin: 15px 0 0;
+	padding: 0;
+	float: left;
+}
+/* 추천리스트 정보 */
+.recommend_detail_content{
+	width: 250px;
+	display: inline-block;
+	margin: 45px 25px; 
+	padding: 0;
+	list-style: none; 
+}
+/* 추천이름 */
+#user_recommend_name_li{
+	color: rgba(0, 0, 0, 1);
+	font-family: 'NanumBarunGothic';
+	font-size: 18px;
+}
+/* 추천인 아이디 */
+#user_recommend_id_li{
+	color: rgba(0, 0, 0, 1);
+	font-family: 'Arita-dotum-Medium';
+	font-size: 16px;
+	margin: 7px 0 0;
+}
+/* 추천리스트 생성 날짜 */
+#user_recommend_date_li{
+	color: rgba(0, 0, 0, 1);
+	font-family: 'Arita-dotum-Medium';
+	font-size: 14px;
+	margin: 7px 0 0;
+}
+/* 좋아요 */
+#user_recommend_like_li{
+	color: rgba(0, 0, 0, 1);
+	font-family: 'Arita-dotum-Medium';
+	font-size: 14px;
+	margin: 15px 0 0;
+}
+/* 소개글 디테일 */
+.recommend_detail_comment{
+	width: 100%;
+	height: 150px;
+	margin-top: 30px ;
+	padding: 0;
+	border : solid 1px rgba(0, 0, 0, 0.1);
+}
+.recommend_detail_comment span{
+	margin: 30px 20px 20px;
+	padding: 0;
+	font-family: 'Arita-dotum-Medium';
+	font-size: 14px;
+}
+#listBtn{
+	width: 100px;
+	height: 40px;
+    padding: 0;
+    margin: 10px 40px 0 0;
+    cursor: pointer;
+	float: right;
+}
+/* 추천 노래 리스트 */
+.recommend_detail_list{
+	width: 100%;
+	height: 500px;
+	padding: 0;
+}
+#recommend_detail_list_info{
+	width: 100%;
+	height: 100px;
+	margin-top: 15px;
+	border-bottom : 1px solid rgba(0, 0, 0, 1);
+}
+.theme_album{
+	width: 480px;
+	height: 100px;
+	background-color:transparent; 
+	border: 0; 
+	outline:0;
+	cursor: pointer;
+}
+#song_list_img{
+	width: 80px; 
+	height: 80px;
+	float: left;
+}
+#title_block{
+	width: 100%;
+	height: 30px;
+	display: block;
+	text-align: left;
+	margin: 15px 100px 0;
+	font-family: 'Arita-dotum-Medium';
+	font-size: 13px;
+}
+#album_block{
+	width: 100%;
+	height: 30px;
+	display: block;
+	text-align: left;
+	margin: 0 100px;
+	font-family: 'Arita-dotum-Medium';
+	font-size: 13px;
+	color: gray;
+}
+.theme_info{
+	font-family: 'Arita-dotum-Medium';
+	font-size: 13px;
+}
+#user_modify_btn{
+	width: 100%;
+	height: 50px;
+	margin: 40px 0 0;
+}
+#listDeleteBtn, #listModifyBtn, #listBtn{
+	width: 100px;
+	height: 40px;
+    padding: 0;
+    margin: 0 0 0 10px;
+    font-size: 15px;
+    cursor: pointer;
+	float: right;
+}
+/* 나눔바른고딕 */
+@font-face {
+   font-family: 'NanumBarunGothic';
+   font-style: normal;
+   font-weight: 400;
+   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+/* 아리따돋움 */ 
+@font-face {
+   font-family: 'Arita-dotum-Medium';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Arita-dotum-Medium.woff%27) format('woff');
+   font-weight: normal;
+   font-style: normal;
+}

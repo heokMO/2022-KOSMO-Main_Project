@@ -19,6 +19,7 @@
 	<select id="getArtistSongs"  resultType="songvo">
 		select s.song_album,
 		       s.song_title,
+		       s.song_img,
 		       s.song_id,
 		        nvl(l.cnt, 0) song_cnt
 		from song s 
@@ -28,6 +29,22 @@
 		on s.song_id = l.song_id
 		where s.song_artist= #{artist}
 	</select>	
+	
+
+	<select id="getArtistLists" resultType="likeartistvo">
+		select artist from LIKE_ARTIST_LIST where USER_ID = #{sessionId ,jdbcType=VARCHAR}
+	</select>
+	
+		<select id="likeornot" parameterType="hashmap" resultType="songvo">
+		select s.song_id,
+	        nvl(l.song_id, 0)like_it
+		from song s
+		left OUTER join (select song_id 
+		                from like_it_list
+		                where mem_acc_id = #{session})l
+		ON s.song_id = l.song_id
+		where s.song_artist = #{song_artist}
+	</select>
 </mapper>
 
  
